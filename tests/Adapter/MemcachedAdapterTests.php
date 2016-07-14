@@ -1,20 +1,20 @@
 <?php
 
-use Cache\Factory\Adapter\Filesystem;
+use Cache\Factory\Adapter\Memcached;
 use Cache\Factory\Config\Adapter\AdapterInterface as Config;
 use Cache\Factory\Config\Loader;
 
-class FilesystemAdapterTests extends PHPUnit_Framework_TestCase
+class MemcachedAdapterTests extends PHPUnit_Framework_TestCase
 {
     /**
      * @var string Name of the adapter in the configuration
      */
-    protected $adapterName = 'local';
+    protected $adapterName = 'memcached';
 
     /**
      * @var string Type of the cache pool adapter
      */
-    protected $adapterType = 'Filesystem';
+    protected $adapterType = 'Memcached';
 
     /**
      * @var string Path to the config file
@@ -43,14 +43,14 @@ class FilesystemAdapterTests extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests creation of the filesystem cache item pool
+     * Tests creation of the memcached cache item pool
      */
     public function testMake()
     {
-        $filesystemAdapterFactory = new Filesystem();
-        $filesystemCacheItemPool  = $filesystemAdapterFactory->make($this->config);
+        $memcachedAdapterFactory = new Memcached();
+        $memcachedCacheItemPool  = $memcachedAdapterFactory->make($this->config);
 
-        $this->assertInstanceOf('Psr\\Cache\\CacheItemPoolInterface', $filesystemCacheItemPool);
-        $this->assertInstanceOf('\\Cache\\Adapter\\Filesystem\\FilesystemCachePool', $filesystemCacheItemPool);
+        $this->assertInstanceOf('Psr\\Cache\\CacheItemPoolInterface', $memcachedCacheItemPool);
+        $this->assertInstanceOf('\\Cache\\Adapter\\Memcached\\MemcachedCachePool', $memcachedCacheItemPool);
     }
 }
