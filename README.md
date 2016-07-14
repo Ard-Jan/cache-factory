@@ -4,6 +4,7 @@
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE)
 [![Build Status](https://travis-ci.org/dgreda/cache-factory.svg?branch=master)](https://travis-ci.org/dgreda/cache-factory)
 [![codecov](https://codecov.io/gh/dgreda/cache-factory/branch/master/graph/badge.svg)](https://codecov.io/gh/dgreda/cache-factory)
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/833af7a6-7eee-471b-a5a8-ee3861113d9f/mini.png)](https://insight.sensiolabs.com/projects/833af7a6-7eee-471b-a5a8-ee3861113d9f)
 
 # Description
 
