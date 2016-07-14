@@ -3,6 +3,7 @@
 [![Author](http://img.shields.io/badge/author-@dgreda-blue.svg?style=flat-square)](https://www.linkedin.com/in/damiangreda)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE)
 [![Build Status](https://travis-ci.org/dgreda/cache-factory.svg?branch=master)](https://travis-ci.org/dgreda/cache-factory)
+[![codecov](https://codecov.io/gh/dgreda/cache-factory/branch/master/graph/badge.svg)](https://codecov.io/gh/dgreda/cache-factory)
 
 # Description
 
