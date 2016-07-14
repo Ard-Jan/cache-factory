@@ -3,3 +3,7 @@ Cache:
     local:
       type: Filesystem
       path: '/tmp'
+    memcached:
+      type: Memcached
+      servers:
+        memcached1: { host: localhost, port: 11211 }
