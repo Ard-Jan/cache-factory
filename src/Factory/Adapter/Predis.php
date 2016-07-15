@@ -11,11 +11,11 @@ class Predis extends AbstractAdapter
     {
         $options = (!empty($config[Config::INDEX_OPTIONS])) ? $config[Config::INDEX_OPTIONS] : null;
 
-        $client = new Client(
-            $config[Config::INDEX_SERVERS],
-            $options
-        );
+        return $this->getPredisInstance($config, $options);
+    }
 
-        return $client;
+    protected function getPredisInstance($config, $options)
+    {
+        return new Client($config[Config::INDEX_SERVERS], $options);
     }
 }

@@ -37,6 +37,8 @@ abstract class AbstractAdapter implements AdapterInterface
     {
         $adapterClassName = str_replace(__NAMESPACE__, '', $adapterClassName);
         $adapterClassName = str_replace('\\', '', $adapterClassName);
+        $adapterClassName = str_replace('Mock_', '', $adapterClassName);
+        $adapterClassName = preg_replace('/_[0-9a-z]+$/', '', $adapterClassName);
         $adapterClassName = sprintf(self::ADAPTER_NAMESPACE_TEMPLATE, $adapterClassName, $adapterClassName);
 
         return $adapterClassName;

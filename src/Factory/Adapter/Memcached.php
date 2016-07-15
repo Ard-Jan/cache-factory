@@ -8,7 +8,7 @@ class Memcached extends AbstractAdapter
 {
     protected function getConfiguredDriver(array $config)
     {
-        $memcached = new \Memcached();
+        $memcached = $this->getMemcachedInstance();
 
         foreach ($config[Config::INDEX_SERVERS] as $server) {
             $memcached->addServer(
@@ -22,5 +22,10 @@ class Memcached extends AbstractAdapter
         }
 
         return $memcached;
+    }
+
+    protected function getMemcachedInstance()
+    {
+        return new \Memcached();
     }
 }

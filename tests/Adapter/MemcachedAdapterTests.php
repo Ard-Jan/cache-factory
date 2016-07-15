@@ -2,6 +2,7 @@
 
 use Cache\Factory\Adapter\Memcached;
 use Cache\Factory\Config\Adapter\AdapterInterface as Config;
+use Cache\Factory\Config\Adapter\Memcached as MemcachedConfig;
 use Cache\Factory\Config\Loader;
 
 class MemcachedAdapterTests extends PHPUnit_Framework_TestCase
@@ -45,10 +46,32 @@ class MemcachedAdapterTests extends PHPUnit_Framework_TestCase
     /**
      * Tests creation of the memcached cache item pool
      */
-    public function testMake()
+    public function testGetConfiguredDriver()
     {
-        $memcachedAdapterFactory = new Memcached();
-        $memcachedCacheItemPool  = $memcachedAdapterFactory->make($this->config);
+        $memcachedMock = $this->getMockBuilder('Memcached')
+            ->setMethods(['addServer', 'setOptions'])
+            ->getMock();
+
+        $firstServerConfig = reset($this->config[MemcachedConfig::INDEX_SERVERS]);
+
+        $memcachedMock
+            ->expects($this->once())
+            ->method('addServer')
+            ->with(
+                $firstServerConfig[MemcachedConfig::INDEX_HOST],
+                $firstServerConfig[MemcachedConfig::INDEX_PORT]
+            );
+
+        $memcachedAdapterFactoryMock = $this->getMockBuilder('Cache\Factory\Adapter\Memcached')
+            ->setMethods(['getMemcachedInstance'])
+            ->getMock();
+
+        $memcachedAdapterFactoryMock
+            ->expects($this->once())
+            ->method('getMemcachedInstance')
+            ->willReturn($memcachedMock);
+
+        $memcachedCacheItemPool = $memcachedAdapterFactoryMock->make($this->config);
 
         $this->assertInstanceOf('Psr\\Cache\\CacheItemPoolInterface', $memcachedCacheItemPool);
         $this->assertInstanceOf('\\Cache\\Adapter\\Memcached\\MemcachedCachePool', $memcachedCacheItemPool);

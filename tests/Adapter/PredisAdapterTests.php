@@ -45,12 +45,23 @@ class PredisAdapterTests extends PHPUnit_Framework_TestCase
     /**
      * Tests creation of the redis cache item pool
      */
-    public function testMake()
+    public function testGetConfiguredDriver()
     {
-        $redisAdapterFactory = new Predis();
-        $redisCacheItemPool  = $redisAdapterFactory->make($this->config);
+        $predisMock = $this->getMockBuilder('Predis\Client')->disableOriginalConstructor()
+            ->getMock();
 
-        $this->assertInstanceOf('Psr\\Cache\\CacheItemPoolInterface', $redisCacheItemPool);
-        $this->assertInstanceOf('\\Cache\\Adapter\\Predis\\PredisCachePool', $redisCacheItemPool);
+        $predisAdapterFactoryMock = $this->getMockBuilder('Cache\Factory\Adapter\Predis')
+            ->setMethods(['getPredisInstance'])
+            ->getMock();
+
+        $predisAdapterFactoryMock
+            ->expects($this->once())
+            ->method('getPredisInstance')
+            ->willReturn($predisMock);
+
+        $predisCacheItemPool = $predisAdapterFactoryMock->make($this->config);
+
+        $this->assertInstanceOf('Psr\\Cache\\CacheItemPoolInterface', $predisCacheItemPool);
+        $this->assertInstanceOf('\\Cache\\Adapter\\Predis\\PredisCachePool', $predisCacheItemPool);
     }
 }

@@ -5,10 +5,6 @@ php:
   - hhvm
   - nightly
 
-services:
-  - memcached
-  - redis-server
-
 install:
    - composer install
 
