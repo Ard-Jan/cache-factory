@@ -3,6 +3,8 @@
 use Cache\Factory\Config\Adapter\AdapterInterface as Config;
 use Cache\Factory\Config\Adapter\Filesystem;
 use Cache\Factory\Factory;
+use Cache\TagInterop\TaggableCacheItemPoolInterface;
+use Psr\Cache\CacheItemPoolInterface;
 
 class FactoryTests extends PHPUnit_Framework_TestCase
 {
@@ -89,8 +91,8 @@ class FactoryTests extends PHPUnit_Framework_TestCase
         $cachePool         = $cachePoolFactory->make($this->adapterName);
         $taggableCachePool = $cachePoolFactory->makeTaggable($this->adapterName);
 
-        $this->assertInstanceOf('Psr\\Cache\\CacheItemPoolInterface', $cachePool);
-        $this->assertInstanceOf('Cache\\Taggable\\TaggablePoolInterface', $taggableCachePool);
+        $this->assertInstanceOf(CacheItemPoolInterface::class, $cachePool);
+        $this->assertInstanceOf(TaggableCacheItemPoolInterface::class, $taggableCachePool);
     }
 
     /**
